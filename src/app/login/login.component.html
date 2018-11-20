@@ -24,11 +24,11 @@
       <a [routerLink]="['/register']" class="btn btn-link" style="float: right;">forgot password</a>
     </div>
   </form>
-    <a class="btn btn-block btn-social btn-facebook">
+    <a class="btn btn-block btn-social btn-facebook" (click)="socialSignIn('facebook')">
       <span class="fab fa-facebook"></span>
       <font color="white">Log in with Facebook</font>
     </a>
-    <a class="btn btn-block btn-social btn-google">
+    <a class="btn btn-block btn-social btn-google" (click)="socialSignIn('google')">
       <span class="fab fa-google"></span>
       <font color="white">Log in with Google</font>
     </a>
