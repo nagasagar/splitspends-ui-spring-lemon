@@ -24,38 +24,49 @@ export class AuthenticationService {
     }
 
     login(username: string, password: string) {
-        return this.http.post<any>(environment.apiUrl + '/api/core/login', { username, password }, {observe: 'response'})
+        const body = new URLSearchParams();
+        body.set('username', username);
+        body.set('password', password);
+        const options = {
+            headers: new HttpHeaders()
+                .set('Accept', 'application/json')
+                .set('Content-Type', 'application/x-www-form-urlencoded'),
+            observe: 'response' as 'body',
+            withCredentials: true
+        };
+        return this.http.post<any>(environment.apiUrl + '/api/core/login',
+            body.toString(), options)
             .pipe(map(response => {
                 // login successful if there's a jwt token in the response
                 const token = response.headers.get('Lemon-Authorization');
                 if (response.status === 200 && token) {
                     // store user details and jwt token in local storage to keep user logged in between page refreshes
                     localStorage.setItem('authHeader', 'Bearer ' + token);
-                    this.currentUserSubject.next(response.body.user);
+                    this.currentUserSubject.next(response.body);
                 }
 
-                return response.body.user;
+                return response.body;
             }));
     }
 
     socialLogin(token: string) {
         const httpHeaders = new HttpHeaders()
-                         .set('Accept', 'application/json')
-                         .set('Authorization', `Bearer ${token}`);
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${token}`);
         return this.http.get<any>(environment.apiUrl + '/api/core/context', {
             headers: httpHeaders,
             observe: 'response'
         }).pipe(map(response => {
-                // login successful if there's a jwt token in the response
-                token = response.headers.get('Lemon-Authorization');
-                if (response.status === 200 && token) {
-                    // store user details and jwt token in local storage to keep user logged in between page refreshes
-                    localStorage.setItem('authHeader', 'Bearer ' + token);
-                    this.currentUserSubject.next(response.body.user);
-                }
+            // login successful if there's a jwt token in the response
+            token = response.headers.get('Lemon-Authorization');
+            if (response.status === 200 && token) {
+                // store user details and jwt token in local storage to keep user logged in between page refreshes
+                localStorage.setItem('authHeader', 'Bearer ' + token);
+                this.currentUserSubject.next(response.body);
+            }
 
-                return response.body.user;
-            }));
+            return response.body;
+        }));
     }
 
     logout() {

@@ -1,5 +1,7 @@
 <div class="container">
-  <h2>Login</h2>
+  <div style="text-align:center">
+    <img width="200" src="assets/sslogo.png">
+  </div>
   <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
       <label for="username">Username</label>
@@ -18,18 +20,28 @@
       </div>
     </div>
     <div class="form-group">
-      <button [disabled]="loading" class="btn btn-primary">Login</button>
-      <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
-      />
-      <a [routerLink]="['/register']" class="btn btn-link" style="float: right;">forgot password</a>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-5">
+            <button [disabled]="loading" class="btn btn-primary btn-block">Login</button>
+            <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+            />
+          </div>
+          <div class="col-sm-2"></div>
+          <div class="col-sm-5">
+            <a [routerLink]="['/register']" class="btn btn-link btn-block" style="float: right;">forgot password</a>
+          </div>
+        </div>
+      </div>
     </div>
   </form>
-    <a class="btn btn-block btn-social btn-facebook" (click)="socialSignIn('facebook')">
-      <span class="fab fa-facebook"></span>
-      <font color="white">Log in with Facebook</font>
-    </a>
-    <a class="btn btn-block btn-social btn-google" (click)="socialSignIn('google')">
-      <span class="fab fa-google"></span>
-      <font color="white">Log in with Google</font>
-    </a>
-  </div>
+  <hr>
+  <a class="btn btn-block btn-social btn-facebook" (click)="socialSignIn('facebook')">
+    <span class="fab fa-facebook"></span>
+    <font color="white">Log in with Facebook</font>
+  </a>
+  <a class="btn btn-block btn-social btn-google" (click)="socialSignIn('google')">
+    <span class="fab fa-google"></span>
+    <font color="white">Log in with Google</font>
+  </a>
+</div>

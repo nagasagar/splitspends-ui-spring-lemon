@@ -1,8 +1,10 @@
 export class User {
     id: number;
     username: string;
-    password: string;
-    firstName: string;
-    lastName: string;
-    token: string;
+    roles: string[];
+    unverified: boolean;
+    blocked: boolean;
+    admin: boolean;
+    goodUser: boolean;
+    goodAdmin: boolean;
 }
