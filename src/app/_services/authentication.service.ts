@@ -69,6 +69,15 @@ export class AuthenticationService {
         }));
     }
 
+    getSitekey() {
+        const httpHeaders = new HttpHeaders()
+            .set('Accept', 'application/json');
+        return this.http.get<any>(environment.apiUrl + '/api/core/context', {
+            headers: httpHeaders
+        }).pipe(map(response => {
+                return response.context.reCaptchaSiteKey;
+        }));
+    }
     logout() {
         // remove user from local storage to log user out
         localStorage.removeItem('currentUser');

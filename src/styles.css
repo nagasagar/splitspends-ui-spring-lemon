@@ -96,3 +96,8 @@ body {
 .fab {
   margin-right: 10px;
 }
+
+.btn.btn-primary:disabled{
+    background-color: #DCDCDC;
+    cursor: not-allowed;
+}

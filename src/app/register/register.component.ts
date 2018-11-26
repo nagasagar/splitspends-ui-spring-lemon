@@ -1,15 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 
 import { AlertService, UserService, AuthenticationService } from '../_services';
 
-@Component({templateUrl: 'register.component.html'})
+@Component({ templateUrl: 'register.component.html' })
 export class RegisterComponent implements OnInit {
     registerForm: FormGroup;
     loading = false;
     submitted = false;
+    sitekey: any;
+
 
     constructor(
         private formBuilder: FormBuilder,
@@ -25,11 +27,12 @@ export class RegisterComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.sitekey = this.getSitekey();
         this.registerForm = this.formBuilder.group({
-            firstName: ['', Validators.required],
-            lastName: ['', Validators.required],
-            username: ['', Validators.required],
-            password: ['', [Validators.required, Validators.minLength(6)]]
+            name: ['', Validators.required],
+            email: ['', Validators.required],
+            password: ['', [Validators.required, Validators.minLength(6)]],
+            captchaResponse: ['', Validators.required]
         });
     }
 
@@ -48,7 +51,7 @@ export class RegisterComponent implements OnInit {
         this.userService.register(this.registerForm.value)
             .pipe(first())
             .subscribe(
-                data => {
+                () => {
                     this.alertService.success('Registration successful', true);
                     this.router.navigate(['/login']);
                 },
@@ -57,4 +60,17 @@ export class RegisterComponent implements OnInit {
                     this.loading = false;
                 });
     }
+
+     getSitekey() {
+        this.authenticationService.getSitekey()
+            .pipe(first())
+            .subscribe(
+                captchasitekey => {
+                    this.sitekey = captchasitekey;
+                },
+                error => {
+                    this.alertService.error(error);
+                });
+    }
+
 }

@@ -11,6 +11,8 @@ import { RegisterComponent } from './register/register.component';
 import { AlertComponent } from './alert/alert.component';
 import { SocialLoginSucessComponent } from './social-login-sucess/social-login-sucess.component';
 import { ErrorInterceptor } from './_utils/error.interceptor';
+import { RecaptchaModule } from 'ng-recaptcha';
+import { RecaptchaFormsModule } from 'ng-recaptcha/forms';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { ErrorInterceptor } from './_utils/error.interceptor';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    RecaptchaModule,
+    RecaptchaFormsModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
