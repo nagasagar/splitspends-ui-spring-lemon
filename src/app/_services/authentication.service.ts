@@ -41,7 +41,7 @@ export class AuthenticationService {
                 const token = response.headers.get('Lemon-Authorization');
                 if (response.status === 200 && token) {
                     // store user details and jwt token in local storage to keep user logged in between page refreshes
-                    localStorage.setItem('authHeader', 'Bearer ' + token);
+                    localStorage.setItem('authHeader', token);
                     this.currentUserSubject.next(response.body);
                 }
 
@@ -61,7 +61,7 @@ export class AuthenticationService {
             token = response.headers.get('Lemon-Authorization');
             if (response.status === 200 && token) {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
-                localStorage.setItem('authHeader', 'Bearer ' + token);
+                localStorage.setItem('authHeader', token);
                 this.currentUserSubject.next(response.body);
             }
 
@@ -80,7 +80,7 @@ export class AuthenticationService {
     }
     logout() {
         // remove user from local storage to log user out
-        localStorage.removeItem('currentUser');
+        localStorage.removeItem('authHeader');
         this.currentUserSubject.next(null);
     }
 }
