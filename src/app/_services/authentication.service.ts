@@ -42,10 +42,11 @@ export class AuthenticationService {
                 if (response.status === 200 && token) {
                     // store user details and jwt token in local storage to keep user logged in between page refreshes
                     localStorage.setItem('authHeader', token);
-                    this.currentUserSubject.next(response.body);
+                    localStorage.setItem('currentUser', JSON.stringify(response.body.user));
+                    this.currentUserSubject.next(response.body.user);
                 }
 
-                return response.body;
+                return response.body.user;
             }));
     }
 
@@ -62,10 +63,11 @@ export class AuthenticationService {
             if (response.status === 200 && token) {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
                 localStorage.setItem('authHeader', token);
-                this.currentUserSubject.next(response.body);
+                localStorage.setItem('currentUser', JSON.stringify(response.body.user));
+                this.currentUserSubject.next(response.body.user);
             }
 
-            return response.body;
+            return response.body.user;
         }));
     }
 
@@ -81,6 +83,7 @@ export class AuthenticationService {
     logout() {
         // remove user from local storage to log user out
         localStorage.removeItem('authHeader');
+        localStorage.removeItem('currentUser');
         this.currentUserSubject.next(null);
     }
 }
