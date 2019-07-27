@@ -44,7 +44,8 @@ export class LoginComponent implements OnInit {
   // convenience getter for easy access to form fields
   get f() { return this.loginForm.controls; }
 
-  onSubmit() {
+  onSubmit(event) {
+    event.preventDefault();
     this.submitted = true;
 
     // stop here if form is invalid
@@ -60,7 +61,7 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['/']);
         },
         error => {
-          this.alertService.error(error);
+          this.alertService.error(error, true);
           this.loading = false;
         });
   }
